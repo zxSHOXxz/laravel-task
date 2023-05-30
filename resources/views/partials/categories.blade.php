@@ -1,16 +1,11 @@
-@if ($categories)
+@foreach ($subcategories as $subcategory)
     <ul>
-        @foreach ($categories as $category)
-            <li>
-                {{ $category->name }}
-                @php
-                    $categories = collect($categories);
-                    $childrens = $categories->where('parent_id', $category->id)->all();
-                @endphp
-                @if ($childrens)
-                    @include('partials.categories', ['categories' => $childrens])
-                @endif
-            </li>
-        @endforeach
+        <li>{{ $subcategory->name }}</li>
+        @php
+            $subcategory = $categories->where('parent_id', $subcategory->id)->all();
+        @endphp
+        @if ($subcategory != null)
+            @include('partials.categories', ['subcategories' => $subcategory, 'categories' => $categories])
+        @endif
     </ul>
-@endif
+@endforeach

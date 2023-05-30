@@ -23,21 +23,22 @@
         <div class="card-header">
             <h5 class="mb-0">قائمة التصنيفات</h5>
         </div>
-        <ul>
-            @foreach ($categories as $category)
-                @if ($category->parent_id === null)
-                    <li>
-                        {{ $category->name }}
-                        @php
-                            $childrens = $categories->where('parent_id', $category->id)->all();
-                        @endphp
-                        @if ($childrens)
-                            @include('partials.categories', ['categories' => $childrens])
-                        @endif
-                    </li>
+
+        <ul class="p-5">
+            @foreach ($parentCategories as $category)
+                <li>{{ $category->name }}</li>
+                @php
+                    $subcategory = $categories->where('parent_id', $category->id)->all();
+                @endphp
+                @if ($subcategory != null)
+                    @include('partials.categories', [
+                        'subcategories' => $subcategory,
+                        'categories' => $categories,
+                    ])
                 @endif
             @endforeach
         </ul>
+
     </div>
     <!-- /basic datatable -->
 
