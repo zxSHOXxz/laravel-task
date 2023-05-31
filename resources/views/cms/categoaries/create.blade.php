@@ -79,7 +79,42 @@
             let formData = new FormData();
             formData.append('name', document.getElementById('name').value);
             formData.append('parent_id', document.getElementById('parent_id').value);
-            store('/cms/admin/categoaries', formData);
+            storeAndUpdateSelect('/cms/admin/categoaries', formData)
+            function storeAndUpdateSelect(url, data) {
+                axios.post(url, data)
+                    .then(function(response) {
+                        showMessage(response.data);
+                        clearForm();
+                        clearAndHideErrors();
+                        updateSelect(data);
+                    })
+                    .catch(function(error) {
+
+                        if (error.response.data.errors !== undefined) {
+                            showErrorMessages(error.response.data.errors);
+                        } else {
+
+                            showMessage(error.response.data);
+                        }
+                    });
+
+            }
+        }
+        function updateSelect(data) {
+            let selectElement = document.getElementById('parent_id');
+            selectElement.innerHTML = '';
+
+            let optionElement = document.createElement('option');
+            optionElement.value = '';
+            optionElement.textContent = 'بدون فئة أب';
+            selectElement.appendChild(optionElement);
+
+            data.forEach(function(category) {
+                let optionElement = document.createElement('option');
+                optionElement.value = category.id;
+                optionElement.textContent = category.name;
+                selectElement.appendChild(optionElement);
+            });
         }
     </script>
 @endsection

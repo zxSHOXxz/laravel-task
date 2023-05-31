@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImportController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('cms.dashboard.index');
 });
+
+
+Route::post('/import', [ImportController::class, 'import'])->name('import');
+Route::get('/create', [ImportController::class, 'create'])->name('createImport');
+
 Route::prefix('cms/admin')->group(function () {
 
     Route::resource('categoaries', CategoryController::class);
-
 });

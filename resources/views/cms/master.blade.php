@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl">
 
 <head>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>لوحة التحكم - @yield('title')</title>
@@ -164,12 +163,29 @@
                             </a>
                             <ul class="nav-group-sub collapse">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link"> عرض التصنيفات </a>
+                                    <a href="{{ route('categoaries.index') }}" class="nav-link"> عرض التصنيفات </a>
                                 </li>
                             </ul>
                             <ul class="nav-group-sub collapse">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link"> اضافة التصنيفات </a>
+                                    <a href="{{ route('categoaries.create') }}" class="nav-link"> اضافة التصنيفات </a>
+                                </li>
+                            </ul>
+                        </li>
+                        </li>
+                        <li class="nav-item">
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link">
+                                <i class="ph-circles-four"></i>
+                                <span>استيراد اكسل </span>
+                            </a>
+                            <ul class="nav-group-sub collapse">
+                                <li class="nav-item">
+                                    <a href="{{ route('categoaries.index') }}" class="nav-link"> عرض البيانات </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('createImport') }}" class="nav-link"> استيراد اكسل
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -211,7 +227,8 @@
                         </div>
                         <a target="blank" href="#"
                             class="gap-1 d-flex justify-content-between align-items-center">
-                            <span class="btn btn-outline-dark"> <i class="fa-solid fa-arrow-up-right-from-square mx-1"></i>   عرض الموقع </span>
+                            <span class="btn btn-outline-dark"> <i
+                                    class="fa-solid fa-arrow-up-right-from-square mx-1"></i> عرض الموقع </span>
 
                         </a>
                         </li>
