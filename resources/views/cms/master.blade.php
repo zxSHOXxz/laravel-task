@@ -181,7 +181,7 @@
                             </a>
                             <ul class="nav-group-sub collapse">
                                 <li class="nav-item">
-                                    <a href="{{ route('categoaries.index') }}" class="nav-link"> عرض البيانات </a>
+                                    <a href="{{ route('indexImported') }}" class="nav-link"> عرض البيانات </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('createImport') }}" class="nav-link"> استيراد اكسل

@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::post('/import', [ImportController::class, 'import'])->name('import');
 Route::get('/create', [ImportController::class, 'create'])->name('createImport');
+Route::get('/index', [ImportController::class, 'index'])->name('indexImported');
 
 Route::prefix('cms/admin')->group(function () {
 

@@ -4,39 +4,43 @@ namespace App\Imports;
 
 use App\Models\Student;
 use App\Models\Subject;
-use App\Models\SubjectName;
-use Maatwebsite\Excel\Concerns\ToModel;
+use App\Models\Mark;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
-class StudentsImport implements ToModel, ToCollection
+class StudentsImport implements ToCollection
 {
     public function collection(Collection $rows)
     {
-        $headers = $rows->shift()->toArray();
-        $data = $rows->toArray();
+        $headerRow = $rows->shift();
+        $subjectNames = $headerRow->slice(2)->toArray();
 
-        foreach ($data as $row) {
-            $student = Student::create([
-                'name' => $row[0]
-            ]);
+        foreach ($rows as $row) {
+            $student_number = $row[0];
+            $studentName = $row[1];
+            $marks = $row->slice(2)->toArray();
 
-            for ($i = 1; $i < count($row); $i++) {
-                Subject::create([
-                    'name' => $headers[$i],
-                    'grade' => $row[$i],
-                    'student_id' => $student->id
-                ]);
+            $student = Student::updateOrCreate(
+                ['student_number' => $student_number],
+                ['name' => $studentName]
+            );
+
+
+            foreach ($subjectNames as $index => $subjectName) {
+                $mark = isset($marks[$index]) ? $marks[$index] : null;
+
+                $subject = Subject::firstOrCreate(['name' => $subjectName]);
+
+                $student->subjects()->attach($subject);
+
+                if (!is_null($mark)) {
+                    Mark::create([
+                        'student_id' => $student->id,
+                        'subject_id' => $subject->id,
+                        'mark' => $mark,
+                    ]);
+                }
             }
         }
-        array_shift($headers);
-
-        foreach ($headers as $header) {
-            SubjectName::firstOrCreate(['name' => $header]);
-        }
-    }
-    public function model(array $row)
-    {
-        return;
     }
 }
