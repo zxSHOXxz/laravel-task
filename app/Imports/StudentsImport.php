@@ -35,7 +35,7 @@ class StudentsImport implements ToCollection
 
                 $subject = Subject::firstOrCreate(['name' => $subjectName]);
 
-                $student->subjects()->attach($subject);
+                $student->subjects()->syncWithoutDetaching($subject);
 
                 if (!is_null($mark)) {
                     $mark = Mark::updateOrCreate([
