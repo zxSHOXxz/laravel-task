@@ -34,7 +34,8 @@
                     <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file">
-                        <button type="submit">استيراد الملف</button>
+                        <br>
+                        <button type="submit" class="btn btn-danger mt-5">استيراد الملف</button>
                     </form>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImportController;
 
@@ -16,9 +17,6 @@ use App\Http\Controllers\ImportController;
 |
 */
 
-Route::get('/', function () {
-    return view('cms.dashboard.index');
-});
 
 
 Route::post('/import', [ImportController::class, 'import'])->name('import');
@@ -27,5 +25,6 @@ Route::get('/index', [ImportController::class, 'index'])->name('indexImported');
 
 Route::prefix('cms/admin')->group(function () {
 
+    Route::resource('/', DashboardController::class);
     Route::resource('categoaries', CategoryController::class);
 });

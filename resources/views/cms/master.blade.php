@@ -337,6 +337,7 @@
         <script src="{{ asset('cms/assets/js/custom.js') }}"></script>
         <!-- Core JS files -->
         <script src="{{ asset('cms/assets/demo/demo_configurator.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script src="{{ asset('cms/assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
         <!-- /core JS files -->
@@ -344,36 +345,6 @@
         <script src="{{ asset('cms/assets/demo/pages/dashboard.js') }}"></script>
         <!-- /theme JS files -->
         <script type="text/javascript" src="{{ asset('cms/assets/js/vendor/pickers/color/spectrum.js') }}"></script>
-        <script>
-            document.getElementById('image').addEventListener('change', function(event) {
-                var file = event.target.files[0];
-                var progress = document.querySelector('.progress');
-                var progressText = document.querySelector('.progress-text');
-                var previewImage = document.getElementById('previewImage');
-
-                var reader = new FileReader();
-                reader.onloadstart = function() {
-                    progress.style.width = '0%';
-                    progressText.textContent = '0%';
-                };
-
-                reader.onprogress = function(event) {
-                    var percentLoaded = Math.round((event.loaded / event.total) * 100);
-                    progress.style.width = percentLoaded + '%';
-                    progressText.textContent = percentLoaded + '%';
-                };
-
-                reader.onload = function() {
-                    progress.style.width = '100%';
-                    progressText.textContent = '100%';
-
-                    previewImage.src = reader.result;
-                    previewImage.style.display = 'block';
-                };
-
-                reader.readAsDataURL(file);
-            });
-        </script>
         @yield('scripts')
 </body>
 
